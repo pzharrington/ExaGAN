@@ -16,6 +16,10 @@ run = './expts/'+config+'/run'+runId+'/'
 
 modelpath = run+'models/g_cosmo_best.h5'
 
+if not os.path.isfile(modelpath):
+    print("Error: File %s with pre-trained weights could not be found")
+    sys.exit()
+
 GAN = GANbuild.DCGAN(config, run)
 GAN.genrtor.load_weights(modelpath)
 

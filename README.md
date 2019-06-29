@@ -67,7 +67,7 @@ The basic model is a simple DCGAN, essentially identical to that of the original
 This MCR technique simply concatenates a second image channel to the generator output, where the second channel is a different normalization of the data in the generated sample. The discriminator is then trained with the 2-channel images (the same transformation is applied to the training data). The normalization for the second channel which seemed to work best was simply a linear scaling of the data, scaled down by some large number (e.g., 1000), fed through a `tanh` to improve numerical stability. This method improved the quality and statistical validity of the output samples, although for larger images (e.g., of size 256x256) it is untested and may not be necessary.
 
 ### Minor Details 
-A few modifications to the default Keras behavior was needed in a few parts of the code. These are minor modifications, and would likely not be necessary if this setup is ported to a different framework.
+A few modifications to the default Keras behavior were needed in parts of the code. These are minor modifications, and would likely not be necessary if this setup is ported to a different framework.
 
 First, the default keras crossentropy loss assumes the network outputs probabilities (e.g., output of a sigmoid neuron), so it transforms back to logits and calls `K.clip_by_value`  to ensure numerical stability -- however, we found this to be both unnecessary and actually destabilized training in many cases. The solution is simply to remove the sigmoid activation on the last layer of the discriminator and just compute the crossentropy loss directly from the logits using a custom keras loss function.
 
