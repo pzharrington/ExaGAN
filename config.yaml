@@ -1,0 +1,22 @@
+base: &BASE
+
+    dataname: 'raw' # base name of training/validation data
+    img_dim: 128 # image dimension
+    noise_vect_len: 64 # length of generator noise vector
+    nlayers: 4 # number of conv+batchnorm layers
+    convkern: 5 # convolution kernel size
+    convstride: 2 # convolution kernel stride
+    nconvfilters: [32, 64, 128, 256] # number of convolutional filters per layer in discriminator
+    ndeconvfilters: [128, 64, 32, 1] # number of deconvolutional filters per layer in generator
+    label_flip: 0.01 # probability of flipping real.fake labels
+    batchsize: 64
+    print_batch: 20 # print losses every n batches
+    checkpt_batch: 150 # save tensorboard checkpoint every n batches
+    cscale: 'lin' # colorscale for image plots
+    datascale: 4 # scaling parameter for normalizing data
+    learn_rate: [0.0002, 0.0002] # learning rates for [G, D]
+    DG_update_ratio: 2 # number of D updates per G update
+    Nepochs: 200 
+    datafmt: 'channels_first' # 'channels_first' for NCHW, 'channels_last' for NHWC
+    multichannel: True # enable/disable multi-channel rescaling
+
