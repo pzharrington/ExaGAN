@@ -18,7 +18,6 @@ The code has been developed and run with the following software:
 
 The [CosmoFlow N-body simulations dataset](https://portal.nersc.gov/project/m3363/) has a very large amount of data available, stored in HDF5 files. A small subset for testing can be downloaded from the  [cosmoUniverse_2019_05_4parE/22309462](https://portal.nersc.gov/project/m3363/cosmoUniverse_2019_05_4parE/22309462/) directory. The following commands will fetch this data and take ~20k slices of size 128x128 from the simulations to be used as training data:
 ```
-mkdir data
 cd data
 wget --recursive https://portal.nersc.gov/project/m3363/cosmoUniverse_2019_05_4parE/22309462
 python slice_universes.py
