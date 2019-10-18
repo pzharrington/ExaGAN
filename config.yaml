@@ -6,8 +6,8 @@ base: &BASE
     nlayers: 4 # number of conv+batchnorm layers
     convkern: 5 # convolution kernel size
     convstride: 2 # convolution kernel stride
-    nconvfilters: [32, 64, 128, 256] # number of convolutional filters per layer in discriminator
-    ndeconvfilters: [128, 64, 32, 1] # number of deconvolutional filters per layer in generator
+    nconvfilters: [64, 128, 256, 512] # number of convolutional filters per layer in discriminator
+    ndeconvfilters: [256, 128, 64, 1] # number of deconvolutional filters per layer in generator
     label_flip: 0.01 # probability of flipping real.fake labels
     batchsize: 64
     print_batch: 20 # print losses every n batches
