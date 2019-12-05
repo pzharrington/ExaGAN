@@ -16,13 +16,7 @@ The code has been developed and run with the following software:
 
 ### Data fetching & pre-processing
 
-The [CosmoFlow N-body simulations dataset](https://portal.nersc.gov/project/m3363/) has a very large amount of data available, stored in HDF5 files. A small subset for testing can be downloaded from the  [cosmoUniverse_2019_05_4parE/22309462](https://portal.nersc.gov/project/m3363/cosmoUniverse_2019_05_4parE/22309462/) directory. The following commands will fetch this data and take ~20k slices of size 128x128 from the simulations to be used as training data:
-```
-cd data
-wget --recursive https://portal.nersc.gov/project/m3363/cosmoUniverse_2019_05_4parE/22309462
-python slice_universes.py
-```
-The network performs better when there is a larger amount of data (e.g., 200,000 samples as in [the original CosmoGAN paper](https://arxiv.org/pdf/1706.02390.pdf)).
+The [CosmoFlow N-body simulations dataset](https://portal.nersc.gov/project/m3363/) has a very large amount of data available, stored in HDF5 files. A small subset for testing can be downloaded from the  [cosmoUniverse_2019_05_4parE/22309462](https://portal.nersc.gov/project/m3363/cosmoUniverse_2019_05_4parE/22309462/) directory. The recommended interface for doing so is via [globus](https://app.globus.org/file-manager?origin_id=f59a3318-df18-11e9-b5de-0ef30f6b83a8&origin_path=%2F22309462%2F), but if globus is unavailable one can use, e.g., `wget` to download the data manually. Once the data has been downloaded, place the hdf5 files in the `./data/` directory. Then, running `python slice_universes.py` in that directory will take ~20k slices of size 128x128 from the simulations to be used as training data. The network performs better when there is a larger amount of data (e.g., 200,000 samples as in [the original CosmoGAN paper](https://arxiv.org/pdf/1706.02390.pdf)).
 
 Any given pixel in the simulation data has some value in \[0, 4000\] (there is technically no upper limit, but the max across all the simulations is roughly 4000), so the data must be transformed to the interval \[-1,1\] for more stable training. This normalization could be done in one of many possible ways (e.g. log transform, linear scaling, etc), but [ recent work](https://arxiv.org/abs/1801.09070) has found the following transformation `s(x)` to be effective in capturing the high dynamic range of the simulations when mapping to \[-1,1\]:
 
